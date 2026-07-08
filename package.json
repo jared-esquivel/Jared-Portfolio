@@ -1,4 +1,7 @@
 {
+  "name": "jared-portfolio",
+  "version": "0.1.0",
+  "homepage": "https://jared-esquivel.github.io/Jared-Portfolio/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
