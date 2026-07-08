@@ -1,0 +1,527 @@
+/* ==========================================================
+   SECTION
+   ========================================================== */
+.timeline-section {
+  position: relative;
+  overflow: hidden;
+  background: #000309;
+  padding: 120px 24px;
+}
+
+/* ==========================================================
+   ATMOSPHERIC LIGHT BLOOMS
+   Tiny, soft pockets of energy living in the negative space
+   around the content — never behind cards, headings, or nodes.
+   Each bloom fades in slowly, holds briefly, fades out slowly,
+   then pauses before its next cycle. Durations are all different
+   (and not round numbers) so blooms never sync into an obvious
+   loop; at any moment only 3–5 are gently visible.
+   ========================================================== */
+.timeline-glow-field {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.timeline-glow {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.timeline-glow--1 {
+  top: 6%;
+  left: 4%;
+  width: 110px;
+  height: 110px;
+  background: #00e0ff;
+  filter: blur(26px);
+  animation-name: bloomLife;
+  animation-duration: 31s;
+  animation-delay: -2s;
+}
+
+.timeline-glow--2 {
+  top: 22%;
+  right: 5%;
+  width: 90px;
+  height: 90px;
+  background: #b26bff;
+  filter: blur(22px);
+  animation-name: bloomLife;
+  animation-duration: 37s;
+  animation-delay: -14s;
+}
+
+.timeline-glow--3 {
+  top: 46%;
+  left: 3%;
+  width: 130px;
+  height: 130px;
+  background: #7cffcb;
+  filter: blur(28px);
+  animation-name: bloomLife;
+  animation-duration: 43s;
+  animation-delay: -8s;
+}
+
+.timeline-glow--4 {
+  top: 62%;
+  right: 4%;
+  width: 100px;
+  height: 100px;
+  background: #2f9bff;
+  filter: blur(24px);
+  animation-name: bloomLife;
+  animation-duration: 29s;
+  animation-delay: -19s;
+}
+
+.timeline-glow--5 {
+  bottom: 10%;
+  left: 6%;
+  width: 170px;
+  height: 170px;
+  background: #00d9c4;
+  filter: blur(32px);
+  animation-name: bloomLife;
+  animation-duration: 47s;
+  animation-delay: -5s;
+}
+
+.timeline-glow--6 {
+  top: 8%;
+  right: 12%;
+  width: 85px;
+  height: 85px;
+  background: #a78bfa;
+  filter: blur(20px);
+  animation-name: bloomLife;
+  animation-duration: 34s;
+  animation-delay: -23s;
+}
+
+.timeline-glow--7 {
+  bottom: 14%;
+  right: 8%;
+  width: 105px;
+  height: 105px;
+  background: #00e0ff;
+  filter: blur(24px);
+  animation-name: bloomLife;
+  animation-duration: 40s;
+  animation-delay: -11s;
+}
+
+@keyframes bloomLife {
+  0% {
+    opacity: 0;
+    transform: scale(0.88);
+  }
+  12% {
+    opacity: 0.16;
+    transform: scale(1);
+  }
+  30% {
+    opacity: 0.22;
+    transform: scale(1.04);
+  }
+  48% {
+    opacity: 0.1;
+    transform: scale(0.96);
+  }
+  60% {
+    opacity: 0;
+    transform: scale(0.88);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.88);
+  }
+}
+
+/* ==========================================================
+   CONTENT SHELL
+   ========================================================== */
+.timeline-shell {
+  position: relative;
+  z-index: 1;
+  width: min(1000px, 100%);
+  margin-inline: auto;
+}
+
+.timeline-header {
+  text-align: center;
+  max-width: 620px;
+  margin: 0 auto 80px;
+}
+
+.timeline-kicker {
+  color: #70fff0;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.8rem;
+  margin: 0 0 16px;
+}
+
+.timeline-heading {
+  color: white;
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  margin: 0 0 18px;
+}
+
+.timeline-intro {
+  color: rgba(255, 255, 255, 0.68);
+  font-size: clamp(1rem, 1.3vw, 1.1rem);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ==========================================================
+   TIMELINE TRACK + BEAM
+   ========================================================== */
+.timeline-track {
+  position: relative;
+}
+
+.timeline-beam {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 4px;
+  width: 44px;
+  height: 100%;
+  overflow: visible;
+}
+
+.timeline-beam-path {
+  filter: drop-shadow(0 0 7px rgba(0, 224, 255, 0.6))
+    drop-shadow(0 0 16px rgba(124, 100, 255, 0.34));
+  animation: beamBreathe 7s ease-in-out infinite;
+}
+
+@keyframes beamBreathe {
+  0%,
+  100% {
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.timeline-beam-pulse {
+  animation: beamPulseTravel 9s linear infinite;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.85));
+}
+
+@keyframes beamPulseTravel {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -1500;
+  }
+}
+
+.timeline-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
+/* ==========================================================
+   TIMELINE ITEM (mobile-first)
+   ========================================================== */
+.timeline-item {
+  position: relative;
+  padding-left: 64px;
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.timeline-item.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================================
+   NODE
+   ========================================================== */
+.timeline-node {
+  position: absolute;
+  top: 4px;
+  left: 6px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #050c18;
+  z-index: 2;
+}
+
+.timeline-node-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1.5px solid color-mix(in srgb, var(--accent) 65%, white 5%);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 16%, transparent);
+  transition:
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
+  animation: nodeBreathe 6s ease-in-out infinite;
+}
+
+@keyframes nodeBreathe {
+  0%,
+  100% {
+    opacity: 0.75;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.timeline-logo {
+  position: relative;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.timeline-logo--placeholder {
+  background: radial-gradient(
+    circle at 35% 30%,
+    color-mix(in srgb, var(--accent) 55%, white 10%),
+    #0b1220 75%
+  );
+}
+
+.timeline-item:hover .timeline-node-ring,
+.timeline-item:focus-within .timeline-node-ring {
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 26%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 85%, white 10%);
+}
+
+/* ==========================================================
+   CARD
+   ========================================================== */
+.timeline-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 14px;
+  padding: 30px 28px 32px;
+  overflow: hidden;
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.4s ease,
+    background-color 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.timeline-card-edge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0.7;
+  transition: opacity 0.4s ease;
+}
+
+.timeline-item:hover .timeline-card,
+.timeline-item:focus-within .timeline-card {
+  transform: translateY(-5px);
+  border-color: color-mix(
+    in srgb,
+    var(--accent) 35%,
+    rgba(255, 255, 255, 0.12)
+  );
+  background: rgba(255, 255, 255, 0.045);
+  box-shadow: 0 20px 44px -18px color-mix(in srgb, var(--accent) 35%, black);
+}
+
+.timeline-item:hover .timeline-card-edge,
+.timeline-item:focus-within .timeline-card-edge {
+  opacity: 1;
+}
+
+/* ==========================================================
+   TYPOGRAPHY + RHYTHM
+   ========================================================== */
+.timeline-date {
+  color: #70fff0;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.72rem;
+  margin: 0 0 14px;
+}
+
+.timeline-org {
+  position: relative;
+  display: inline-block;
+  color: white;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0 0 10px;
+}
+
+.timeline-org-underline {
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  height: 2px;
+  width: 36px;
+  background: var(--accent);
+  border-radius: 2px;
+  opacity: 0.8;
+}
+
+.timeline-role {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin: 0 0 18px;
+}
+
+.timeline-description {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.96rem;
+  line-height: 1.75;
+  margin: 0;
+  max-width: 46ch;
+}
+
+.timeline-item:focus-within .timeline-card {
+  outline: 2px solid color-mix(in srgb, var(--accent) 60%, transparent);
+  outline-offset: 3px;
+}
+
+/* ==========================================================
+   TABLET
+   ========================================================== */
+@media (min-width: 640px) {
+  .timeline-item {
+    padding-left: 78px;
+  }
+
+  .timeline-beam {
+    left: 6px;
+    width: 52px;
+  }
+
+  .timeline-node {
+    width: 44px;
+    height: 44px;
+    left: 8px;
+  }
+
+  .timeline-logo {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+/* ==========================================================
+   DESKTOP: centered beam, alternating sides
+   ========================================================== */
+@media (min-width: 900px) {
+  .timeline-beam {
+    left: 50%;
+    width: 64px;
+    transform: translateX(-50%);
+  }
+
+  .timeline-list {
+    gap: 72px;
+  }
+
+  .timeline-item {
+    padding-left: 0;
+    width: calc(50% - 56px);
+  }
+
+  .timeline-item--left {
+    margin-right: auto;
+    padding-right: 56px;
+  }
+
+  .timeline-item--right {
+    margin-left: auto;
+    padding-left: 56px;
+  }
+
+  .timeline-item--left .timeline-node {
+    left: auto;
+    right: -78px;
+  }
+
+  .timeline-item--right .timeline-node {
+    left: -78px;
+  }
+
+  .timeline-item--left {
+    transform: translate(-16px, 24px);
+  }
+
+  .timeline-item--right {
+    transform: translate(16px, 24px);
+  }
+
+  .timeline-item--left.is-visible,
+  .timeline-item--right.is-visible {
+    transform: translate(0, 0);
+  }
+}
+
+/* ==========================================================
+   REDUCED MOTION
+   ========================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .timeline-glow,
+  .timeline-beam-path,
+  .timeline-beam-pulse,
+  .timeline-node-ring {
+    animation: none !important;
+  }
+
+  .timeline-glow {
+    opacity: 0.12;
+  }
+
+  .timeline-beam-pulse {
+    opacity: 0.4;
+  }
+
+  .timeline-item,
+  .timeline-card {
+    transition: none !important;
+  }
+
+  .timeline-item {
+    opacity: 1;
+    transform: none !important;
+  }
+
+  .timeline-item:hover .timeline-card,
+  .timeline-item:focus-within .timeline-card {
+    transform: none;
+  }
+}

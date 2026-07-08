@@ -1,0 +1,13 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #000309;
+  color: white;
+  font-family: Arial, sans-serif;
+
+  /* Allow vertical scrolling */
+  overflow-x: hidden;
+}

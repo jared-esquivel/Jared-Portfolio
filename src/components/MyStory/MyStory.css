@@ -1,0 +1,222 @@
+/* Scoped to .story-section and its children — no global resets here,
+   since the app already has its own global CSS. */
+
+.story-section {
+  min-height: 100vh;
+  padding: 120px 24px;
+  display: grid;
+  place-items: center;
+  background: #000309;
+  /* Added so NightSky positions relative to this section, not the page */
+  position: relative;
+  overflow: hidden;
+}
+
+.story-shell {
+  width: min(1120px, 100%);
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 72px;
+  align-items: start;
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.story-profile {
+  position: static;
+}
+
+.portrait-placeholder {
+  width: 260px;
+  aspect-ratio: 1;
+  border-radius: 28px;
+  background: linear-gradient(135deg, #07111f, #02060f), #111;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  margin-bottom: 32px;
+}
+
+.story-profile h2 {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 500;
+  line-height: 1;
+  margin: 0 0 20px;
+  color: white;
+}
+
+.profile-role {
+  color: #70fff0;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.78rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.profile-location {
+  color: rgba(255, 255, 255, 0.55);
+  margin-top: 28px;
+}
+
+.story-content {
+  max-width: 720px;
+}
+
+.story-kicker {
+  color: #70fff0;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.8rem;
+  margin: 0 0 24px;
+}
+
+.story-content h1 {
+  font-size: clamp(3rem, 6vw, 5.6rem);
+  line-height: 0.95;
+  letter-spacing: -0.05em;
+  font-weight: 600;
+  margin: 0 0 48px;
+  color: white;
+}
+
+.story-content h1 span {
+  display: block;
+  background: linear-gradient(90deg, #2f9bff, #00e0ff, #00d9c4, #7cffcb);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.story-copy {
+  max-width: 680px;
+}
+
+.story-copy p {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: clamp(1rem, 1.4vw, 1.18rem);
+  line-height: 1.9;
+  margin: 0 0 28px;
+}
+
+@media (max-width: 850px) {
+  .story-shell {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .portrait-placeholder {
+    width: 220px;
+  }
+}
+
+/* ==========================================================
+   MOBILE / TABLET REFINEMENT — MY STORY
+   Desktop grid/typography untouched; these rules only improve
+   rhythm, readability, and spacing below 1024px.
+   ========================================================== */
+
+/* Tablet: slightly reduce the gap before full mobile stacking */
+@media (max-width: 1024px) and (min-width: 851px) {
+  .story-shell {
+    gap: 56px;
+  }
+
+  .story-content h1 {
+    font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+  }
+}
+
+/* Mobile: intentional single-column rhythm, not just a stack */
+@media (max-width: 850px) {
+  .story-section {
+    padding: 72px 20px;
+    min-height: 0; /* let content size the section instead of forcing 100vh */
+  }
+
+  .story-shell {
+    gap: 40px;
+  }
+
+  /* Center the profile block on mobile — reads more intentional
+     than a left-aligned block above centered-feeling body copy */
+  .story-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .portrait-placeholder {
+    width: 180px;
+    margin-bottom: 24px;
+  }
+
+  .story-profile h2 {
+    font-size: clamp(1.7rem, 6vw, 2.2rem);
+    margin-bottom: 12px;
+  }
+
+  .profile-location {
+    margin-top: 14px;
+  }
+
+  .story-content {
+    max-width: 100%;
+  }
+
+  .story-kicker {
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  .story-content h1 {
+    text-align: center;
+    font-size: clamp(2.1rem, 9vw, 3rem);
+    line-height: 1.05;
+    margin-bottom: 32px;
+  }
+
+  .story-copy {
+    max-width: 100%;
+  }
+
+  /* Comfortable line length + rhythm rather than full-bleed text */
+  .story-copy p {
+    font-size: 1rem;
+    line-height: 1.75;
+    margin-bottom: 22px;
+    max-width: 62ch;
+    margin-inline: auto;
+  }
+}
+
+/* Very small phones: tighten just slightly further */
+@media (max-width: 380px) {
+  .story-section {
+    padding: 56px 18px;
+  }
+
+  .portrait-placeholder {
+    width: 150px;
+  }
+
+  .story-content h1 {
+    font-size: clamp(1.9rem, 10vw, 2.4rem);
+  }
+}
+
+@media (max-width: 768px) {
+  .story-content {
+    text-align: center;
+  }
+
+  .story-copy {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .story-copy p {
+    text-align: center;
+  }
+}

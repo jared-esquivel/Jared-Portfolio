@@ -1,0 +1,141 @@
+/* ==========================================================
+   NAVBAR
+   Transparent glass bar — subtle blur, hairline border, no
+   heavy shadow. Stays visually secondary to page content.
+   ========================================================== */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+
+  background: rgba(0, 3, 9, 0.3);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.82);
+}
+
+.navbar-shell {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: min(1180px, 100%);
+  margin: 0 auto;
+  padding: 16px 20px;
+}
+
+/* ---------- Brand ---------- */
+.navbar-brand {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  transition: opacity 200ms ease;
+}
+
+.navbar-brand:hover {
+  opacity: 0.8;
+}
+
+.navbar-brand:focus-visible {
+  outline: 2px solid rgba(0, 224, 255, 0.6);
+  outline-offset: 4px;
+  border-radius: 3px;
+}
+
+/* ---------- Links ---------- */
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.navbar-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px; /* comfortable tap target */
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.92rem;
+  font-weight: 500;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  transition: color 200ms ease;
+}
+
+/* Understated underline indicator instead of a background pill —
+   keeps the nav visually quiet */
+.navbar-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 10px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 200ms ease;
+}
+
+.navbar-link:hover {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.navbar-link:hover::after {
+  transform: scaleX(1);
+}
+
+.navbar-link.is-active {
+  color: #ffffff;
+}
+
+.navbar-link.is-active::after {
+  transform: scaleX(1);
+}
+
+.navbar-link:focus-visible {
+  outline: 2px solid rgba(0, 224, 255, 0.6);
+  outline-offset: 4px;
+  border-radius: 3px;
+}
+
+/* ==========================================================
+   MOBILE
+   Scales down spacing/typography rather than introducing a
+   hamburger menu — three links don't warrant that complexity.
+   ========================================================== */
+@media (max-width: 480px) {
+  .navbar-shell {
+    padding: 12px 16px;
+  }
+
+  .navbar-brand {
+    font-size: 0.85rem;
+  }
+
+  .navbar-links {
+    gap: 16px;
+  }
+
+  .navbar-link {
+    font-size: 0.82rem;
+  }
+}
+
+/* ==========================================================
+   REDUCED MOTION
+   ========================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .navbar-brand,
+  .navbar-link,
+  .navbar-link::after {
+    transition: none;
+  }
+}

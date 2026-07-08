@@ -1,0 +1,457 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, Arial, sans-serif;
+  background: #000309;
+  color: white;
+}
+
+/* =====================================================
+   IMPACT HERO
+===================================================== */
+
+.impact-section {
+  position: relative;
+  overflow: hidden;
+  min-height: 90vh;
+  padding: 110px 24px;
+  display: grid;
+  place-items: center;
+
+  background:
+    radial-gradient(
+      circle at 18% 14%,
+      rgba(0, 224, 255, 0.08),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 82% 72%,
+      rgba(124, 255, 203, 0.07),
+      transparent 36%
+    ),
+    radial-gradient(
+      circle at 72% 20%,
+      rgba(155, 107, 255, 0.08),
+      transparent 28%
+    ),
+    linear-gradient(180deg, #07111d 0%, #040913 42%, #000309 100%);
+}
+
+/* =====================================================
+   FIREFLIES CANVAS
+   The atomic background has been removed entirely — the
+   fireflies are now the only background layer, at z-index 0
+   so content sits cleanly above it.
+===================================================== */
+
+#firefliesCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: auto;
+}
+
+/* =====================================================
+   CONTENT
+===================================================== */
+
+.impact-shell,
+.panels-shell {
+  position: relative;
+  z-index: 2;
+  width: min(1220px, 100%);
+  margin: auto;
+}
+
+.impact-header {
+  display: grid;
+  grid-template-columns: 0.9fr 1.4fr;
+  gap: 60px;
+  align-items: end;
+}
+
+.impact-header h1 {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: clamp(4rem, 9vw, 8.5rem);
+  line-height: 0.9;
+  letter-spacing: -0.08em;
+}
+
+.impact-intro {
+  max-width: 360px;
+}
+
+.impact-intro p {
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.3;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  margin: 0 0 30px;
+}
+
+.impact-intro a {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  padding: 18px 30px;
+  border-radius: 999px;
+  background: white;
+  color: #000309;
+  text-decoration: none;
+}
+
+/* =====================================================
+   ANALYTICS (STAT) CARDS
+===================================================== */
+
+.impact-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.impact-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.stat-card {
+  min-height: 235px;
+  padding: 34px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  opacity: 0;
+  transform: translateY(22px) scale(0.97);
+  transition:
+    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.stat-card.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.icon {
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  background: rgba(0, 224, 255, 0.18);
+  margin-bottom: 28px;
+}
+
+.icon.green {
+  background: rgba(124, 255, 203, 0.18);
+}
+
+.icon.purple {
+  background: rgba(155, 107, 255, 0.18);
+}
+
+.impact-stats h2 {
+  margin: 0 0 16px;
+  font-size: 2.4rem;
+  font-variant-numeric: tabular-nums; /* keeps digit width stable while counting up */
+}
+
+.impact-stats p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.5;
+}
+
+/* =====================================================
+   IMPACT PANELS
+===================================================== */
+
+.impact-panels {
+  position: relative;
+  overflow: hidden;
+  padding: 120px 24px 140px;
+  background: #000309;
+}
+
+.panels-shell {
+  position: relative;
+  z-index: 2;
+}
+
+.panels-top {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 80px;
+  align-items: start;
+  margin-bottom: 72px;
+}
+
+.panels-top h2 {
+  margin: 0;
+  font-size: clamp(4rem, 8vw, 7.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.08em;
+}
+
+.panels-top p {
+  margin: 0 0 28px;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 1.35rem;
+  line-height: 1.3;
+}
+
+.panels-top a {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 30px;
+  border-radius: 999px;
+  text-decoration: none;
+  color: #000309;
+  background: white;
+  transition: transform 0.35s ease;
+}
+
+.panels-top a:hover {
+  transform: translateY(-2px);
+}
+
+/* =====================================================
+   PANEL GRID
+   Desktop: standard 3-up grid.
+   Mobile: becomes a swipe carousel — see the media query below.
+===================================================== */
+
+.panel-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+/* =====================================================
+   PANEL CARD
+   Entrance state + refined hover: image scales slowly, border
+   brightens softly, shadow deepens, text lifts by a few px only.
+===================================================== */
+
+.impact-panel {
+  position: relative;
+  overflow: hidden;
+  height: 520px;
+  border-radius: 28px;
+  background: #0d1118;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  transition:
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.5s ease,
+    box-shadow 0.5s ease;
+
+  opacity: 0;
+  transform: translateY(22px) scale(0.98);
+}
+
+.impact-panel.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.impact-panel:hover,
+.impact-panel:focus-within {
+  transform: translateY(-8px) scale(1);
+  border-color: rgba(0, 224, 255, 0.28);
+  box-shadow:
+    0 34px 80px rgba(0, 0, 0, 0.5),
+    0 0 46px rgba(0, 224, 255, 0.1);
+}
+
+/* =====================================================
+   IMAGE
+===================================================== */
+
+.panel-image {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.impact-panel:hover .panel-image,
+.impact-panel:focus-within .panel-image {
+  transform: scale(1.045); /* slow, subtle — not the exaggerated 1.05+ snap */
+}
+
+/* Placeholder gradients (unchanged) */
+
+.panel-image.hack {
+  background:
+    linear-gradient(to bottom, transparent 42%, rgba(0, 0, 0, 0.9)),
+    radial-gradient(circle at 45% 35%, #66dfff, #25445f 40%, #111 85%);
+}
+
+.panel-image.panels {
+  background:
+    linear-gradient(to bottom, transparent 42%, rgba(0, 0, 0, 0.9)),
+    radial-gradient(circle at 45% 35%, #c19bff, #3a2d6a 40%, #111 85%);
+}
+
+.panel-image.workshop {
+  background:
+    linear-gradient(to bottom, transparent 42%, rgba(0, 0, 0, 0.9)),
+    radial-gradient(circle at 45% 35%, #7cffcb, #234d48 42%, #111 85%);
+}
+
+/* =====================================================
+   OVERLAY
+===================================================== */
+
+.panel-overlay {
+  position: absolute;
+  left: 30px;
+  right: 30px;
+  bottom: 30px;
+  z-index: 2;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.impact-panel:hover .panel-overlay,
+.impact-panel:focus-within .panel-overlay {
+  transform: translateY(-4px); /* "only a few pixels," per the brief */
+}
+
+.panel-overlay h3 {
+  margin: 0 0 12px;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.panel-overlay p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.55;
+  font-size: 1.05rem;
+}
+
+/* =====================================================
+   MOBILE — MOBILE-FIRST BASE, THEN DESKTOP ENHANCES
+   The base rules above are written to work at 320px; this query
+   is what turns the panel grid into a native-feeling horizontal
+   swipe carousel specifically for narrow viewports.
+===================================================== */
+
+@media (max-width: 900px) {
+  .impact-section {
+    padding: 80px 20px;
+  }
+
+  .impact-header {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .impact-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .panels-top {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+
+  /* Carousel container: horizontal scroll with snap, hidden
+     scrollbar, and native-feeling momentum on iOS/Android. */
+  .panel-grid {
+    display: flex;
+    overflow-x: auto;
+    gap: 16px;
+    padding: 4px 0 22px;
+
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch; /* momentum scrolling on iOS */
+
+    /* Centers the first/last card nicely instead of pinning them
+       flush to the viewport edge, similar to Apple's card rails */
+    padding-inline: calc((100vw - 84vw) / 2);
+    scroll-padding-inline: calc((100vw - 84vw) / 2);
+
+    /* Hide scrollbar cross-browser */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* old Edge/IE */
+  }
+
+  .panel-grid::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+  }
+
+  .impact-panel {
+    flex: 0 0 84vw;
+    height: 460px;
+    scroll-snap-align: center;
+  }
+}
+
+/* =====================================================
+   REDUCED MOTION
+   Disables firefly motion (handled in JS), count-up animation
+   (handled in JS — final values render immediately), and every
+   hover/entrance transform below.
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .impact-stats article,
+  .impact-panel,
+  .panel-image,
+  .panel-overlay,
+  .panels-top a {
+    transition: none !important;
+  }
+
+  .impact-stats article,
+  .impact-panel {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .impact-panel:hover,
+  .impact-panel:focus-within,
+  .impact-panel:hover .panel-image,
+  .impact-panel:focus-within .panel-image,
+  .impact-panel:hover .panel-overlay,
+  .impact-panel:focus-within .panel-overlay {
+    transform: none !important;
+  }
+}
+
+.panel-image {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.panel-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  /* Darkens only the bottom */
+  background: linear-gradient(
+    to top,
+    rgba(0, 3, 9, 0.95) 0%,
+    rgba(0, 3, 9, 0.75) 25%,
+    rgba(0, 3, 9, 0.25) 50%,
+    transparent 75%
+  );
+}

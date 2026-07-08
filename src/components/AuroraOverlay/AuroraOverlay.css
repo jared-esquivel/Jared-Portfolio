@@ -1,0 +1,351 @@
+/* ==========================================================
+   CONTAINER
+   Fills the Featured Projects section (which must have
+   position: relative). A soft radial mask fades the whole
+   aurora out toward every edge, so nothing ever looks
+   chopped off — it just naturally dissolves into the night
+   sky no matter what shapes live inside.
+   ========================================================== */
+.aurora-overlay {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+
+  -webkit-mask-image: radial-gradient(
+    ellipse 80% 65% at 50% 38%,
+    black 0%,
+    black 40%,
+    transparent 85%
+  );
+  mask-image: radial-gradient(
+    ellipse 80% 65% at 50% 38%,
+    black 0%,
+    black 40%,
+    transparent 85%
+  );
+}
+
+/* ==========================================================
+   ARCS
+   Large, wide, centered bands with asymmetric border-radius
+   values so each one reads as a curved sweep of light rather
+   than a flat gradient bar. Heavily blurred for soft edges.
+   ========================================================== */
+.aurora-arc {
+  position: absolute;
+  left: 50%;
+  width: 165%;
+  border-radius: 48% 52% 38% 62% / 60% 65% 35% 40%;
+  filter: blur(70px);
+  will-change: transform, opacity;
+  transform: translate3d(-50%, 0, 0);
+}
+
+.aurora-arc--1 {
+  top: 8%;
+  height: 62%;
+  background: linear-gradient(
+    115deg,
+    rgba(47, 90, 255, 0.16) 0%,
+    rgba(0, 209, 255, 0.15) 35%,
+    rgba(0, 217, 196, 0.12) 62%,
+    rgba(124, 255, 203, 0.07) 85%,
+    transparent 100%
+  );
+  animation:
+    auroraArcDrift1 80s ease-in-out infinite,
+    auroraBreathe1 24s ease-in-out infinite;
+}
+
+.aurora-arc--2 {
+  top: 18%;
+  height: 50%;
+  border-radius: 55% 45% 60% 40% / 45% 55% 45% 55%;
+  background: linear-gradient(
+    100deg,
+    rgba(0, 224, 255, 0.14) 0%,
+    rgba(124, 255, 203, 0.13) 45%,
+    rgba(140, 100, 255, 0.08) 80%,
+    transparent 100%
+  );
+  animation:
+    auroraArcDrift2 100s ease-in-out infinite,
+    auroraBreathe2 30s ease-in-out infinite;
+  animation-delay:
+    -20s,
+    -8s;
+}
+
+.aurora-arc--3 {
+  top: 2%;
+  height: 68%;
+  border-radius: 42% 58% 55% 45% / 65% 55% 45% 35%;
+  background: linear-gradient(
+    130deg,
+    rgba(124, 92, 255, 0.09) 0%,
+    rgba(0, 224, 255, 0.11) 40%,
+    rgba(47, 155, 255, 0.09) 70%,
+    transparent 100%
+  );
+  animation:
+    auroraArcDrift3 92s ease-in-out infinite,
+    auroraBreathe3 26s ease-in-out infinite;
+  animation-delay:
+    -45s,
+    -16s;
+}
+
+/* Arc drift: slow horizontal sway + very slight rotation, so the
+   curve itself feels like it's slowly reshaping, not sliding rigidly */
+@keyframes auroraArcDrift1 {
+  0% {
+    transform: translate3d(-53%, 0, 0) rotate(-2deg);
+  }
+  50% {
+    transform: translate3d(-47%, 2%, 0) rotate(1.5deg);
+  }
+  100% {
+    transform: translate3d(-53%, 0, 0) rotate(-2deg);
+  }
+}
+
+@keyframes auroraArcDrift2 {
+  0% {
+    transform: translate3d(-48%, -1%, 0) rotate(1.5deg);
+  }
+  50% {
+    transform: translate3d(-54%, 1%, 0) rotate(-2deg);
+  }
+  100% {
+    transform: translate3d(-48%, -1%, 0) rotate(1.5deg);
+  }
+}
+
+@keyframes auroraArcDrift3 {
+  0% {
+    transform: translate3d(-51%, 1%, 0) rotate(-1deg);
+  }
+  50% {
+    transform: translate3d(-46%, -1.5%, 0) rotate(2deg);
+  }
+  100% {
+    transform: translate3d(-51%, 1%, 0) rotate(-1deg);
+  }
+}
+
+/* Breathe: gentle scale + opacity pulse layered on top of drift */
+@keyframes auroraBreathe1 {
+  0%,
+  100% {
+    opacity: 0.85;
+    transform: scale(1, 1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.06, 1.1);
+  }
+}
+@keyframes auroraBreathe2 {
+  0%,
+  100% {
+    opacity: 0.8;
+    transform: scale(1, 1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.08, 1.05);
+  }
+}
+@keyframes auroraBreathe3 {
+  0%,
+  100% {
+    opacity: 0.75;
+    transform: scale(1, 1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05, 1.08);
+  }
+}
+
+/* ==========================================================
+   CURTAINS
+   Thin vertical light beams layered on top of the arcs. Each
+   is a tall, slightly skewed gradient sliver, blurred at the
+   edges, that gently shimmers in opacity/height — like real
+   aurora curtains rippling.
+   ========================================================== */
+.aurora-curtains {
+  position: absolute;
+  inset: 0;
+  /* Curtains fade out toward the very top and bottom so they
+     feel like they're hanging in the middle of the sky, not
+     cut off at a hard boundary */
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 20%,
+    black 65%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 20%,
+    black 65%,
+    transparent 100%
+  );
+}
+
+.aurora-curtain {
+  position: absolute;
+  top: -5%;
+  height: 85%;
+  width: 14%;
+  filter: blur(28px);
+  transform-origin: top center;
+  will-change: transform, opacity;
+}
+
+.aurora-curtain--1 {
+  left: 18%;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 224, 255, 0.16),
+    rgba(124, 255, 203, 0.1) 55%,
+    transparent 100%
+  );
+  transform: skewX(-6deg) scaleY(1);
+  animation: curtainShimmer1 14s ease-in-out infinite;
+}
+
+.aurora-curtain--2 {
+  left: 34%;
+  width: 18%;
+  background: linear-gradient(
+    to bottom,
+    rgba(47, 155, 255, 0.14),
+    rgba(0, 217, 196, 0.09) 60%,
+    transparent 100%
+  );
+  transform: skewX(4deg) scaleY(1);
+  animation: curtainShimmer2 17s ease-in-out infinite;
+  animation-delay: -5s;
+}
+
+.aurora-curtain--3 {
+  left: 50%;
+  width: 20%;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 209, 255, 0.18),
+    rgba(140, 100, 255, 0.09) 55%,
+    transparent 100%
+  );
+  transform: skewX(-3deg) scaleY(1);
+  animation: curtainShimmer3 20s ease-in-out infinite;
+  animation-delay: -11s;
+}
+
+.aurora-curtain--4 {
+  left: 66%;
+  width: 16%;
+  background: linear-gradient(
+    to bottom,
+    rgba(124, 255, 203, 0.13),
+    rgba(0, 224, 255, 0.08) 55%,
+    transparent 100%
+  );
+  transform: skewX(6deg) scaleY(1);
+  animation: curtainShimmer1 16s ease-in-out infinite;
+  animation-delay: -7s;
+}
+
+.aurora-curtain--5 {
+  left: 78%;
+  width: 12%;
+  background: linear-gradient(
+    to bottom,
+    rgba(178, 107, 255, 0.1),
+    rgba(0, 224, 255, 0.07) 55%,
+    transparent 100%
+  );
+  transform: skewX(-4deg) scaleY(1);
+  animation: curtainShimmer2 19s ease-in-out infinite;
+  animation-delay: -3s;
+}
+
+/* Shimmer: subtle vertical stretch + opacity ripple, as if the
+   curtain of light is gently rippling top to bottom */
+@keyframes curtainShimmer1 {
+  0%,
+  100% {
+    opacity: 0.75;
+    transform: skewX(-6deg) scaleY(1);
+  }
+  50% {
+    opacity: 1;
+    transform: skewX(-6deg) scaleY(1.08);
+  }
+}
+@keyframes curtainShimmer2 {
+  0%,
+  100% {
+    opacity: 0.7;
+    transform: skewX(4deg) scaleY(1);
+  }
+  50% {
+    opacity: 1;
+    transform: skewX(4deg) scaleY(1.1);
+  }
+}
+@keyframes curtainShimmer3 {
+  0%,
+  100% {
+    opacity: 0.8;
+    transform: skewX(-3deg) scaleY(1);
+  }
+  50% {
+    opacity: 1;
+    transform: skewX(-3deg) scaleY(1.06);
+  }
+}
+
+/* ==========================================================
+   REDUCED MOTION
+   Freeze everything into one calm, natural-looking resting
+   frame rather than removing the aurora entirely.
+   ========================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .aurora-arc,
+  .aurora-curtain {
+    animation: none !important;
+  }
+
+  .aurora-arc {
+    transform: translate3d(-50%, 0, 0) scale(1, 1) rotate(0deg);
+    opacity: 0.85;
+  }
+
+  .aurora-curtain--1 {
+    transform: skewX(-6deg) scaleY(1);
+    opacity: 0.75;
+  }
+  .aurora-curtain--2 {
+    transform: skewX(4deg) scaleY(1);
+    opacity: 0.7;
+  }
+  .aurora-curtain--3 {
+    transform: skewX(-3deg) scaleY(1);
+    opacity: 0.8;
+  }
+  .aurora-curtain--4 {
+    transform: skewX(6deg) scaleY(1);
+    opacity: 0.75;
+  }
+  .aurora-curtain--5 {
+    transform: skewX(-4deg) scaleY(1);
+    opacity: 0.7;
+  }
+}

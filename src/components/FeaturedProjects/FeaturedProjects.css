@@ -1,0 +1,316 @@
+/* ==========================================================
+   SECTION + LAYERING
+   NightSky and AuroraOverlay render as absolutely-positioned
+   siblings filling this section. .projects-shell sits above
+   both via z-index. No new background is added here.
+   ========================================================== */
+.projects-section {
+  position: relative;
+  overflow: hidden;
+  background: #000309;
+  padding: 120px 24px;
+}
+
+.projects-shell {
+  position: relative;
+  z-index: 2; /* above NightSky (z-index: 0) and AuroraOverlay */
+  width: min(1180px, 100%);
+  margin-inline: auto;
+}
+
+/* ==========================================================
+   SECTION HEADING
+   ========================================================== */
+.projects-header {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 64px;
+}
+
+.projects-kicker {
+  color: #70fff0;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.8rem;
+  margin: 0 0 16px;
+}
+
+.projects-heading {
+  color: white;
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin: 0 0 20px;
+}
+
+.projects-intro {
+  color: rgba(255, 255, 255, 0.68);
+  font-size: clamp(1rem, 1.3vw, 1.1rem);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ==========================================================
+   GRID
+   Mobile-first: single column by default, then more breathing
+   room on tablet, then a clean 3-across row on desktop.
+   ========================================================== */
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+}
+
+@media (min-width: 640px) {
+  .projects-grid {
+    gap: 36px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .projects-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+}
+
+/* ==========================================================
+   CARD
+   A restrained, "floating object in the night sky" surface —
+   low-opacity background, a hairline border, and a soft glow
+   that brightens only on hover/focus. No blur applied to the
+   card itself, so content stays perfectly crisp.
+   ========================================================== */
+.project-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  overflow: hidden;
+  text-decoration: none;
+
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.4s ease,
+    background-color 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.project-card:hover,
+.project-card:focus-within {
+  transform: translateY(-6px);
+  border-color: rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
+/* ==========================================================
+   MEDIA / MOCKUP PLACEHOLDER AREA
+   Each accent gets its own subtle gradient identity. A soft
+   inner glow brightens gently on hover — restrained, not neon.
+   ========================================================== */
+.project-media {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+
+.project-media-glow {
+  position: absolute;
+  inset: 0;
+  opacity: 0.75;
+  transition:
+    opacity 0.4s ease,
+    transform 0.6s ease;
+}
+
+.project-card:hover .project-media-glow,
+.project-card:focus-within .project-media-glow {
+  opacity: 1;
+  transform: scale(1.03);
+}
+
+/* Blue / cyan — AI Math Workshop */
+.project-card--blue .project-media-glow {
+  background:
+    radial-gradient(
+      120% 100% at 20% 0%,
+      rgba(47, 90, 255, 0.35),
+      transparent 60%
+    ),
+    radial-gradient(
+      100% 100% at 100% 100%,
+      rgba(0, 224, 255, 0.3),
+      transparent 65%
+    ),
+    linear-gradient(160deg, #050c18, #02060f);
+}
+
+/* Warm amber / mint — Prompt-Us Pizzeria */
+.project-card--amber .project-media-glow {
+  background:
+    radial-gradient(
+      120% 100% at 15% 0%,
+      rgba(255, 175, 90, 0.28),
+      transparent 60%
+    ),
+    radial-gradient(
+      100% 100% at 100% 100%,
+      rgba(124, 255, 203, 0.24),
+      transparent 65%
+    ),
+    linear-gradient(160deg, #16110a, #0a0805);
+}
+
+/* Violet / cyan — Portfolio Hero */
+.project-card--violet .project-media-glow {
+  background:
+    radial-gradient(
+      120% 100% at 20% 0%,
+      rgba(140, 100, 255, 0.32),
+      transparent 60%
+    ),
+    radial-gradient(
+      100% 100% at 100% 100%,
+      rgba(0, 224, 255, 0.26),
+      transparent 65%
+    ),
+    linear-gradient(160deg, #100a1a, #05030c);
+}
+
+/* ==========================================================
+   CARD BODY
+   ========================================================== */
+.project-body {
+  padding: 28px 26px 30px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.project-title {
+  color: white;
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0 0 10px;
+}
+
+.project-description {
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 0.98rem;
+  line-height: 1.65;
+  margin: 0 0 22px;
+}
+
+/* ==========================================================
+   TECH TAGS
+   Plain text-on-hairline chips, not glowing pill badges.
+   ========================================================== */
+.project-tech-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 26px;
+  padding: 0;
+}
+
+.project-tech-tag {
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  padding: 5px 12px;
+}
+
+/* ==========================================================
+   VIEW PROJECT LINK
+   ========================================================== */
+.project-link {
+  margin-top: auto;
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #7cffe0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition:
+    border-color 0.3s ease,
+    gap 0.3s ease,
+    color 0.3s ease;
+}
+
+.project-link:hover,
+.project-link:focus-visible {
+  border-color: rgba(124, 255, 224, 0.6);
+  gap: 10px;
+}
+
+.project-link span {
+  transition: transform 0.3s ease;
+}
+
+.project-link:hover span,
+.project-link:focus-visible span {
+  transform: translateX(2px);
+}
+
+/* ==========================================================
+   FOCUS VISIBILITY
+   Cards and links both need a clearly visible keyboard focus
+   ring, distinct from the hover glow.
+   ========================================================== */
+.project-card:focus-within {
+  outline: 2px solid rgba(124, 255, 224, 0.5);
+  outline-offset: 3px;
+}
+
+.project-link:focus-visible {
+  outline: 2px solid rgba(124, 255, 224, 0.7);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* ==========================================================
+   REDUCED MOTION
+   Card lift/scale transitions are disabled; hover-state colors
+   still change instantly rather than animating.
+   ========================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .project-card,
+  .project-media-glow,
+  .project-link,
+  .project-link span {
+    transition: none !important;
+  }
+
+  .project-card:hover,
+  .project-card:focus-within {
+    transform: none;
+  }
+}
+
+.project-media {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+}
+
+.project-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+.project-card:hover .project-image {
+  transform: scale(1.04);
+}

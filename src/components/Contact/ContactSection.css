@@ -1,0 +1,292 @@
+/* ==========================================================
+   SECTION
+   Fills the viewport, content perfectly centered both axes.
+   ========================================================== */
+.contact-section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  padding: 48px 24px;
+
+  background:
+    radial-gradient(
+      circle at 15% 15%,
+      rgba(0, 224, 255, 0.12),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 82% 18%,
+      rgba(155, 107, 255, 0.08),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at 70% 80%,
+      rgba(124, 255, 203, 0.08),
+      transparent 36%
+    ),
+    linear-gradient(180deg, #08111d, #030712 60%, #000309);
+}
+
+/* ==========================================================
+   CANVAS
+   Sits behind all content, never intercepts clicks meant for
+   buttons/links (pointer-events stays enabled at the canvas level
+   only so mouse-move/click can drive the animation; content itself
+   sits above via z-index and stacking context, and its own links
+   remain independently clickable).
+   ========================================================== */
+.contact-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+/* ==========================================================
+   CONTENT
+   Centered column, generous whitespace, one calm fade-up on load.
+   ========================================================== */
+.contact-content {
+  position: relative;
+  z-index: 2;
+  width: min(760px, 100%);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.contact-content.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.contact-heading {
+  margin: 0 0 26px;
+  color: white;
+  font-size: clamp(2.6rem, 6vw, 4.6rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.contact-text {
+  margin: 0 0 48px;
+
+  color: rgba(255, 255, 255, 0.72);
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+  line-height: 1.7;
+}
+
+/* ==========================================================
+   BUTTONS
+   Mobile-first: stacked, full-width-feeling column. Desktop
+   enhances into a horizontal row via the media query below.
+   ========================================================== */
+.contact-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 14px;
+  width: 100%;
+  max-width: 360px;
+  margin-bottom: 56px;
+}
+
+.contact-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px 28px;
+  border-radius: 999px;
+  font-size: 1.02rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s ease,
+    background-color 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.contact-button-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+/* Primary — Email, the main call to action */
+.contact-button--primary {
+  background: white;
+  color: #000309;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+}
+
+.contact-button--primary:hover,
+.contact-button--primary:focus-visible {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 46px rgba(255, 255, 255, 0.18);
+}
+
+/* Secondary — LinkedIn, GitHub, Resume */
+.contact-button--secondary {
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.contact-button--secondary:hover,
+.contact-button--secondary:focus-visible {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(0, 224, 255, 0.35);
+  box-shadow: 0 20px 46px rgba(0, 224, 255, 0.1);
+}
+
+.contact-button:focus-visible {
+  outline: 2px solid rgba(0, 224, 255, 0.6);
+  outline-offset: 3px;
+}
+
+/* ==========================================================
+   FOOTER
+   ========================================================== */
+.contact-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.85rem;
+}
+
+.contact-location {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.contact-copyright {
+  margin: 0;
+}
+
+/* ==========================================================
+   TABLET / DESKTOP: buttons enhance into a horizontal row
+   ========================================================== */
+@media (min-width: 640px) {
+  .contact-buttons {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: none;
+  }
+
+  .contact-button {
+    flex: 0 0 auto;
+  }
+}
+
+/* ==========================================================
+   REDUCED MOTION
+   ========================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .contact-content {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .contact-button {
+    transition: none;
+  }
+
+  .contact-button:hover,
+  .contact-button:focus-visible {
+    transform: none;
+  }
+}
+
+/* ==========================================================
+   RESPONSIVE REFINEMENTS — additions only
+   ========================================================== */
+
+/* Prevent text from ever feeling too wide on large desktop screens */
+.contact-heading {
+  margin-inline: auto;
+}
+/* 
+@media (min-width: 1200px) {
+  .contact-text {
+    max-width: 560px;
+  }
+} */
+
+/* Small phones: tighten spacing so the section doesn't feel oversized
+   on short viewports, and guarantee comfortable tap targets */
+/* ==========================================================
+   MOBILE REFINEMENT
+========================================================== */
+@media (max-width: 640px) {
+  .contact-section {
+    min-height: 100svh;
+    padding: 56px 24px 48px;
+  }
+
+  .contact-heading {
+    max-width: 12ch;
+    font-size: clamp(2.15rem, 8.6vw, 2.75rem);
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    margin-bottom: 22px;
+  }
+
+  .contact-text {
+    font-size: 1.05rem;
+    line-height: 1.65;
+    margin-bottom: 40px;
+  }
+
+  .contact-buttons {
+    width: 100%;
+    max-width: 420px;
+    gap: 14px;
+    margin-bottom: 44px;
+  }
+
+  .contact-button {
+    width: 100%;
+    min-height: 56px;
+    padding: 18px 26px;
+    font-size: 1.05rem;
+    border-radius: 16px;
+  }
+
+  .contact-footer {
+    gap: 6px;
+    font-size: 0.8rem;
+  }
+
+  .contact-location {
+    font-size: 0.85rem;
+  }
+}
+
+/* Landscape phones / short viewports: avoid excessive vertical padding
+   pushing content awkwardly */
+@media (max-height: 620px) and (orientation: landscape) {
+  .contact-section {
+    min-height: auto;
+    padding: 48px 24px;
+  }
+}

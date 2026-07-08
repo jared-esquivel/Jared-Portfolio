@@ -1,0 +1,633 @@
+.hero {
+  min-height: 100vh;
+  position: relative;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: radial-gradient(
+    circle at top,
+    #050c18 0%,
+    #02060f 45%,
+    #000309 100%
+  );
+}
+
+#aurora {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* Hero text starts hidden until intro finishes */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: left;
+  max-width: 1200px;
+  width: 100%;
+  padding-inline: 2rem;
+  margin-inline: auto;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(18px);
+  animation: heroReveal 1.1s ease forwards;
+  animation-delay: 3.7s;
+}
+
+.eyebrow {
+  color: #70fff0;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+h1 {
+  font-size: clamp(3rem, 8vw, 7rem);
+  margin: 0;
+  text-shadow: 0 0 30px rgba(0, 191, 255, 0.45);
+}
+
+.hero-content p {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 1.1rem;
+}
+
+/* Intro layer */
+.idea-intro {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(
+    circle,
+    rgba(0, 191, 255, 0.08),
+    rgba(0, 3, 9, 0.96) 58%,
+    rgba(0, 3, 9, 1) 100%
+  );
+  backdrop-filter: blur(18px);
+  animation: introFadeOut 1s ease forwards;
+  animation-delay: 3.45s;
+}
+
+.idea-stage {
+  width: min(86vw, 520px);
+  display: grid;
+  place-items: center;
+  transform: scale(0.94);
+  opacity: 0;
+  animation: stageArrive 0.9s ease forwards;
+}
+
+.idea-bulb {
+  width: min(78vw, 400px);
+  overflow: visible;
+  filter: drop-shadow(0 0 20px rgba(0, 191, 255, 0.65))
+    drop-shadow(0 0 60px rgba(140, 100, 255, 0.22));
+}
+
+.intro-bulb-outline,
+.intro-bulb-base,
+.intro-rays line,
+.intro-orbit {
+  fill: none;
+  stroke: #00bfff;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 8px #00bfff)
+    drop-shadow(0 0 18px rgba(0, 191, 255, 0.75));
+}
+
+.intro-bulb-outline {
+  stroke-width: 12;
+  stroke-dasharray: 900;
+  stroke-dashoffset: 900;
+  animation: drawBulb 1.15s ease forwards;
+  animation-delay: 1.05s;
+}
+
+.intro-bulb-base {
+  stroke-width: 10;
+  opacity: 0;
+  animation: baseAppear 0.65s ease forwards;
+}
+
+.base-one {
+  animation-delay: 1.85s;
+}
+.base-two {
+  animation-delay: 2s;
+}
+
+/* Rays fade in already in place */
+.intro-rays line {
+  stroke-width: 8;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation:
+    rayFadeIn 0.7s ease forwards,
+    rayGlow 2s ease-in-out infinite alternate;
+  animation-delay: 2.25s, 2.75s;
+}
+
+.intro-atom {
+  opacity: 0;
+  transform-origin: 200px 185px;
+  animation: atomAppear 0.7s ease forwards;
+  animation-delay: 0.25s;
+}
+
+.intro-orbit {
+  stroke-width: 4;
+  opacity: 0;
+  stroke-dasharray: 520;
+  stroke-dashoffset: 520;
+  animation: drawOrbit 1s ease forwards;
+}
+
+.orbit-one {
+  animation-delay: 0.55s;
+}
+
+.orbit-two {
+  transform: rotate(60deg);
+  transform-origin: 200px 185px;
+  animation-delay: 0.72s;
+}
+
+.orbit-three {
+  transform: rotate(-60deg);
+  transform-origin: 200px 185px;
+  animation-delay: 0.88s;
+}
+
+.intro-nucleus {
+  fill: white;
+  opacity: 0;
+  transform-origin: 200px 185px;
+  filter: drop-shadow(0 0 8px white) drop-shadow(0 0 22px #00bfff)
+    drop-shadow(0 0 40px rgba(190, 120, 255, 0.6));
+  animation: nucleusIgnite 0.8s ease forwards;
+  animation-delay: 0.2s;
+}
+
+.intro-electron {
+  fill: white;
+  filter: drop-shadow(0 0 6px white) drop-shadow(0 0 14px #00bfff);
+}
+
+.intro-electron-track {
+  transform-origin: 200px 185px;
+  opacity: 0;
+  animation:
+    electronAppear 0.6s ease forwards,
+    electronSpin 3s linear infinite;
+}
+
+.track-one {
+  animation-delay: 1.05s, 1.2s;
+}
+
+.track-two {
+  transform: rotate(60deg);
+  animation-delay: 1.15s, 1.25s;
+  animation-duration: 0.6s, 4s;
+}
+
+.track-three {
+  transform: rotate(-60deg);
+  animation-delay: 1.25s, 1.3s;
+  animation-duration: 0.6s, 5s;
+}
+
+.intro-energy-ring {
+  fill: none;
+  stroke: white;
+  stroke-width: 4;
+  opacity: 0;
+  transform-origin: 200px 185px;
+  filter: drop-shadow(0 0 12px white) drop-shadow(0 0 30px #00eaff)
+    drop-shadow(0 0 60px rgba(190, 120, 255, 0.65));
+  animation: energyExpand 1.25s ease-out forwards;
+  animation-delay: 2.55s;
+}
+
+.intro-kicker {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.76);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: kickerAppear 0.8s ease forwards;
+  animation-delay: 1.65s;
+}
+
+@keyframes stageArrive {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes atomAppear {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes nucleusIgnite {
+  0% {
+    opacity: 0;
+    transform: scale(0.45);
+  }
+  55% {
+    opacity: 1;
+    transform: scale(1.35);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes drawOrbit {
+  to {
+    opacity: 0.85;
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes drawBulb {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes baseAppear {
+  to {
+    opacity: 1;
+  }
+}
+@keyframes electronAppear {
+  to {
+    opacity: 1;
+  }
+}
+@keyframes electronSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes rayFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.75;
+  }
+}
+@keyframes rayGlow {
+  from {
+    opacity: 0.45;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes energyExpand {
+  0% {
+    r: 18;
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.95;
+  }
+  100% {
+    r: 280;
+    opacity: 0;
+  }
+}
+
+@keyframes kickerAppear {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes introFadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: scale(1.04);
+  }
+}
+@keyframes heroReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .idea-intro {
+    display: none;
+  }
+  .hero-content {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* The hero text */
+
+/* ---------- Animated greeting ---------- */
+
+.animated-greeting {
+  max-width: 640px;
+  /* sits slightly left of true center within the 1200px container */
+  margin-right: auto;
+}
+
+.greeting-line {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+
+.greeting-line--intro {
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 1.1rem;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.5rem;
+}
+
+.greeting-line--name {
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  font-weight: 700;
+  line-height: 1.05;
+}
+
+/* Each letter fades up softly as it's revealed, not a hard terminal blink */
+.greeting-letter {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s ease;
+}
+
+.greeting-letter.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Premium blue -> cyan -> teal -> mint gradient, applied only to "Jared" */
+.greeting-letter.is-gradient.is-visible {
+  background: linear-gradient(90deg, #2f9bff, #00e0ff, #00d9c4, #7cffcb);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Wraps just the letters of "Jared" so the underline matches its width */
+.greeting-name-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.greeting-underline {
+  position: absolute;
+  left: 0;
+  bottom: -0.08em;
+  height: 4px;
+  width: 0;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #2f9bff, #00e0ff, #00d9c4, #7cffcb);
+  box-shadow: 0 0 12px rgba(0, 224, 255, 0.55);
+  transition: width 0.6s ease;
+}
+
+.greeting-underline.is-drawn {
+  width: 100%;
+}
+
+/* Blinking typing cursor, fades away once the animation is done */
+.greeting-cursor {
+  display: inline-block;
+  width: 3px;
+  height: 0.8em;
+  margin-left: 6px;
+  background: #00e0ff;
+  vertical-align: -0.05em;
+  box-shadow: 0 0 8px rgba(0, 224, 255, 0.8);
+  animation: cursorBlink 0.9s steps(1) infinite;
+}
+
+.greeting-cursor.is-done {
+  animation: none;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+@keyframes cursorBlink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Clude prompt */
+
+/* ---------- Rotating title ---------- */
+
+.rotating-title-container {
+  /* Matches the greeting's width/alignment so it sits directly
+     underneath "I'm Jared" without shifting the page layout */
+  max-width: 640px;
+  margin-right: auto;
+  margin-top: 2rem;
+
+  /* Fixed height so the layout never jumps as titles swap in/out */
+  height: clamp(2.4rem, 3.4vw, 3rem);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+
+  /* Needed so rotateX reads as a gentle 3D tilt, not a flat skew */
+  perspective: 600px;
+}
+
+.rotating-title-text {
+  font-size: clamp(1.6rem, 2.5vw, 2.1rem);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  display: inline-block;
+  transform-style: preserve-3d;
+
+  /* Gradient text, same technique as the "Jared" gradient */
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Entrance: fades in, sharpens from blur, rises up, tilts from 8deg to 0 */
+.rotating-title-text.is-in {
+  animation-name: rotatingTitleIn;
+  animation-duration: 2s;
+}
+
+/* Exit: fades out, blurs slightly, drops down, tilts to -8deg */
+.rotating-title-text.is-out {
+  animation-name: rotatingTitleOut;
+  animation-duration: 0.55s;
+}
+
+@keyframes rotatingTitleIn {
+  from {
+    opacity: 0;
+    filter: blur(3px);
+    transform: translateY(4px) scale(0.995);
+  }
+
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes rotatingTitleOut {
+  from {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    filter: blur(4px);
+    transform: translateY(-4px);
+  }
+}
+
+/* Reduced motion: show a static, untilted title with no cycling */
+@media (prefers-reduced-motion: reduce) {
+  .rotating-title-text {
+    animation: none !important;
+    opacity: 1;
+    filter: none;
+    transform: none;
+  }
+}
+
+/* ==========================================================
+   MOBILE / TABLET REFINEMENT — HERO
+   Desktop untouched below 1024px+; these rules only tone things
+   down and improve rhythm on smaller viewports.
+   ========================================================== */
+
+/* Tablet: modest tightening before full mobile simplification */
+@media (max-width: 1024px) and (min-width: 641px) {
+  .hero-content {
+    padding-inline: 32px;
+  }
+
+  .greeting-line--name {
+    font-size: clamp(2.6rem, 7vw, 5.5rem);
+  }
+
+  .rotating-title-text {
+    font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+  }
+}
+
+/* Mobile: reduce visual competition between background, intro
+   animation, and typography */
+@media (max-width: 640px) {
+  .hero-content {
+    padding-inline: 24px;
+    max-width: 100%;
+  }
+
+  .animated-greeting {
+    max-width: 100%;
+  }
+
+  /* Slightly smaller than the current clamp() floor, so the name
+     never feels cramped against the viewport edge */
+  .greeting-line--intro {
+    font-size: 1rem;
+  }
+
+  .greeting-line--name {
+    font-size: clamp(2.2rem, 11vw, 3.2rem);
+    line-height: 1.08;
+  }
+
+  .rotating-title-container {
+    height: clamp(2rem, 8vw, 2.6rem);
+    margin-top: 0.4rem;
+  }
+
+  .rotating-title-text {
+    font-size: clamp(1.25rem, 6vw, 1.6rem);
+  }
+
+  /* Quiet the aurora canvas itself on mobile — same animation,
+     lower visual intensity, so it never competes with the text */
+  #aurora {
+    opacity: 0.7;
+    filter: saturate(0.85);
+  }
+
+  /* Intro SVG: slightly smaller and less glow-heavy so it doesn't
+     dominate a small screen the way it can on desktop */
+  .idea-bulb {
+    width: min(62vw, 300px);
+    filter: drop-shadow(0 0 14px rgba(0, 191, 255, 0.5))
+      drop-shadow(0 0 36px rgba(140, 100, 255, 0.16));
+  }
+
+  .intro-kicker {
+    font-size: 0.68rem;
+  }
+}
+
+/* Very small phones: prevent the greeting from ever feeling tight
+   against the edges */
+@media (max-width: 380px) {
+  .hero-content {
+    padding-inline: 20px;
+  }
+
+  .greeting-line--name {
+    font-size: clamp(2rem, 12vw, 2.8rem);
+  }
+}
+
+/* Respect reduced motion: also dial back the static aurora/intro
+   presence rather than just disabling motion, since a fully static
+   but still-vivid background can itself feel busy next to text */
+@media (prefers-reduced-motion: reduce) and (max-width: 640px) {
+  #aurora {
+    opacity: 0.55;
+  }
+}
