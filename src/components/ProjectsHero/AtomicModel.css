@@ -1,5 +1,6 @@
+/* --- Base Component Styles --- */
 .atomic-model {
-  width: min(100%, 480px); /* was 420px — modest, deliberate increase */
+  width: min(100%, 480px);
   overflow: visible;
 }
 
@@ -27,96 +28,8 @@
   filter: drop-shadow(0 0 5px white) drop-shadow(0 0 12px #00bfff);
 }
 
+/* --- Core Animations & Triggers --- */
 .atom-spin {
-  .atomic-model {
-    width: min(100%, 480px); /* was 420px — modest, deliberate increase */
-    overflow: visible;
-  }
-
-  .atomic-orbit {
-    fill: none;
-    stroke: #00bfff;
-    stroke-width: 1.5;
-    stroke-linecap: round;
-    opacity: 0.5;
-    filter: drop-shadow(0 0 6px rgba(0, 191, 255, 0.55));
-  }
-
-  .orbit-two-group {
-    transform: rotate(60deg);
-    transform-origin: 200px 200px;
-  }
-
-  .orbit-three-group {
-    transform: rotate(-60deg);
-    transform-origin: 200px 200px;
-  }
-
-  .atomic-electron {
-    fill: white;
-    filter: drop-shadow(0 0 5px white) drop-shadow(0 0 12px #00bfff);
-  }
-
-  .atom-spin {
-    transform-origin: 200px 200px;
-    animation: atomSlowSpin 60s linear infinite;
-  }
-
-  @keyframes atomSlowSpin {
-    to {
-      transform: rotate(360deg);
-    }
-  }
-
-  .atomic-nucleus {
-    fill: white;
-    filter: drop-shadow(0 0 8px white) drop-shadow(0 0 22px #00bfff)
-      drop-shadow(0 0 40px rgba(140, 100, 255, 0.5));
-    animation: nucleusBreathe 6s ease-in-out infinite;
-    transform-origin: 200px 200px;
-  }
-
-  @keyframes nucleusBreathe {
-    0%,
-    100% {
-      transform: scale(1);
-      filter: drop-shadow(0 0 8px white) drop-shadow(0 0 22px #00bfff)
-        drop-shadow(0 0 40px rgba(140, 100, 255, 0.5));
-    }
-    50% {
-      transform: scale(1.08);
-      filter: drop-shadow(0 0 10px white) drop-shadow(0 0 28px #00bfff)
-        drop-shadow(0 0 50px rgba(140, 100, 255, 0.65));
-    }
-  }
-
-  @media (max-width: 767px) {
-    .atomic-model {
-      width: min(66vw, 280px);
-    }
-
-    .atomic-orbit {
-      opacity: 0.4;
-      filter: drop-shadow(0 0 4px rgba(0, 191, 255, 0.4));
-    }
-
-    .atomic-electron {
-      filter: drop-shadow(0 0 3px white) drop-shadow(0 0 8px #00bfff);
-    }
-
-    .atomic-nucleus {
-      filter: drop-shadow(0 0 5px white) drop-shadow(0 0 14px #00bfff)
-        drop-shadow(0 0 24px rgba(140, 100, 255, 0.35));
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .atom-spin,
-    .atomic-nucleus {
-      animation: none !important;
-    }
-  }
-
   transform-origin: 200px 200px;
   animation: atomSlowSpin 60s linear infinite;
 }
@@ -149,6 +62,7 @@
   }
 }
 
+/* --- Responsive & Accessibility --- */
 @media (max-width: 767px) {
   .atomic-model {
     width: min(66vw, 280px);
