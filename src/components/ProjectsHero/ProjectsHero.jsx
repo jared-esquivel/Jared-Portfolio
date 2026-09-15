@@ -32,9 +32,18 @@ export default function ProjectsHero() {
             impact.
           </p>
 
-          <a href="#software" className="projects-hero-cta">
+          <button
+            type="button"
+            className="projects-hero-cta"
+            onClick={() => {
+              document.getElementById("software")?.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+              });
+            }}
+          >
             Explore Projects
-          </a>
+          </button>
         </div>
 
         <div className="projects-hero-visual">

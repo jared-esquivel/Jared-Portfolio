@@ -31,7 +31,7 @@ const CONTACT_LINKS = [
     id: "resume",
     label: "Resume",
     icon: "📄",
-    href: "https://docs.google.com/document/d/1xftrHe08N7Z4mA4a2XI278PutR-lzjn4/edit?usp=sharing&ouid=103862160462904518417&rtpof=true&sd=true",
+    href: "https://docs.google.com/document/d/1pF-R1g2rZ60LmVhtd5P62hheoFPqsH38/edit?usp=sharing&ouid=103862160462904518417&rtpof=true&sd=true",
     variant: "secondary",
   },
 ];

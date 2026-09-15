@@ -32,7 +32,7 @@ const PROJECTS = [
     description:
       "A student-centered learning experience that helps students use AI ethically for math support.",
     tech: ["React", "Tailwind.CSS", "JS"],
-    liveUrl: "https://think-first-demo.netlify.app/",
+    liveUrl: "https://jared-esquivel.github.io/Think-First-AI-Studio/",
     image: thinkFirstImg,
   },
   {

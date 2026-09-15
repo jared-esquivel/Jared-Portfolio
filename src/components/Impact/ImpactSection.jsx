@@ -196,9 +196,17 @@ export default function ImpactSection() {
                 Leadership, community events, and student-centered initiatives
                 that create real opportunities.
               </p>
-              <a href="#impact-panels">
+              <button
+                type="button"
+                onClick={() => {
+                  document.getElementById("impact-content")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                  });
+                }}
+              >
                 See My Impact <span>→</span>
-              </a>
+              </button>
             </div>
 
             <div className="impact-stats" ref={statsReveal.ref}>
@@ -216,7 +224,7 @@ export default function ImpactSection() {
       </section>
 
       <section className="impact-panels" id="impact-panels">
-        <div className="panels-shell">
+        <div className="panels-shell" id="impact-content">
           <div className="panels-top">
             <h2>
               Turning Ideas
@@ -230,7 +238,17 @@ export default function ImpactSection() {
                 <br />
                 Leave with community and opportunity.
               </p>
-              <a href="#experience">Explore the Journey</a>
+              <button
+                type="button"
+                onClick={() => {
+                  document.getElementById("experience")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                  });
+                }}
+              >
+                Explore the Journey
+              </button>
             </div>
           </div>
 

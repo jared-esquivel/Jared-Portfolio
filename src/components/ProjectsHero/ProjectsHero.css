@@ -74,11 +74,18 @@
   align-items: center;
   padding: 17px 34px;
   border-radius: 999px;
+
   background: white;
   color: #000309;
+
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+
   font-weight: 600;
   font-size: 1rem;
   text-decoration: none;
+
   transition:
     transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 0.35s ease;
