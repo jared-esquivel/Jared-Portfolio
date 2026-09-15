@@ -13,5 +13,8 @@
     "react-dom": "latest",
     "react-router-dom": "^7.18.1",
     "vite": "latest"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
   }
 }

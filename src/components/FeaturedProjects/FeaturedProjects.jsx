@@ -10,12 +10,12 @@ import digitalNestImg from "../../assets/digital-nest.png";
 const projects = [
   {
     id: "ai-math-workshop",
-    title: "Think-First AI Math Workshop",
+    title: "Think-First AI Studio",
     description:
       "An interactive learning tool that helps students use AI ethically for math support.",
     tech: ["React", "CSS", "JavaScript"],
     accent: "blue", // matches a modifier class in the CSS
-    href: "https://think-first-demo.netlify.app/",
+    href: "https://jared-esquivel.github.io/Think-First-AI-Studio/",
     image: thinkFirstImg,
   },
   {

@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./Pages/Home";
@@ -7,7 +7,7 @@ import Media from "./Pages/Media";
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <Navbar />
 
       <Routes>
@@ -15,6 +15,6 @@ export default function App() {
         <Route path="/projects" element={<Projects />} />
         <Route path="/media" element={<Media />} />
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
 }
