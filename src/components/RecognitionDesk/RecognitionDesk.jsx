@@ -70,7 +70,7 @@ const RESUME_SIGNOFF = {
     "View my resume for experience, technical skills, internships, projects, leadership, and awards.",
   ctaLabel: "View Resume →",
   ctaHref:
-    "https://docs.google.com/document/d/1xftrHe08N7Z4mA4a2XI278PutR-lzjn4/edit#heading=h.r4t1ocxzi88",
+    "https://docs.google.com/document/d/1ibgipIOE5p_wiJn-QDJawmpHZ5NvhKgh/edit?usp=sharing&ouid=103862160462904518417&rtpof=true&sd=true",
 };
 
 const prefersReducedMotion =
