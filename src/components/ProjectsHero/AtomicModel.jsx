@@ -15,13 +15,10 @@ export default function AtomicModel() {
 
     const svg = svgRef.current;
 
-    // Restart SVG animations whenever this component mounts
+    // Ensure SMIL is running without resetting its timeline. Resetting to
+    // zero made the first visible movement feel delayed after navigation.
     if (typeof svg.unpauseAnimations === "function") {
       svg.unpauseAnimations();
-    }
-
-    if (typeof svg.setCurrentTime === "function") {
-      svg.setCurrentTime(0);
     }
 
     // Respect reduced motion
@@ -77,6 +74,7 @@ export default function AtomicModel() {
             dur="9s"
             repeatCount="indefinite"
             rotate="auto"
+            begin="-2.5s"
           />
         </circle>
 
@@ -89,7 +87,7 @@ export default function AtomicModel() {
               dur="12s"
               repeatCount="indefinite"
               rotate="auto"
-              begin="-2s"
+              begin="-4s"
             />
           </circle>
         </g>
@@ -105,6 +103,7 @@ export default function AtomicModel() {
               keyPoints="1;0"
               keyTimes="0;1"
               calcMode="linear"
+              begin="-6s"
             />
           </circle>
         </g>
