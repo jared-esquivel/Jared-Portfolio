@@ -1,11 +1,12 @@
 import { useEffect, useRef } from "react";
 import "./AtomicModel.css";
 
-// Reusable, continuously-animating atomic model. Electrons use
-// SVG's <animateMotion> + <mpath> to travel along the exact
-// elliptical orbit path, rather than rotating a group around the
-// ellipse's center (which traces a circle, not the ellipse itself —
-// that mismatch was the earlier "electrons feel detached" bug).
+const ORBIT_PATH =
+  "M350,200 A150,56 0 1,1 50,200 A150,56 0 1,1 350,200";
+
+// Reusable, continuously-animating atomic model. Each electron carries
+// its motion path directly so it remains reliable when the site is served
+// from a subpath with hash-based routing.
 export default function AtomicModel() {
   const svgRef = useRef(null);
 
@@ -40,16 +41,6 @@ export default function AtomicModel() {
       role="img"
       aria-label="Animated atomic model, the portfolio's visual signature"
     >
-      <defs>
-        {/* Invisible motion path shaped exactly like the visible
-            orbit ellipse. Electrons travel along this via
-            animateMotion, so they stay locked to the true curve. */}
-        <path
-          id="orbitPath"
-          d="M350,200 A150,56 0 1,1 50,200 A150,56 0 1,1 350,200"
-        />
-      </defs>
-
       <g className="atom-spin">
         <ellipse
           className="atomic-orbit orbit-one"
@@ -81,9 +72,12 @@ export default function AtomicModel() {
 
         {/* Electron 1: base orbit */}
         <circle className="atomic-electron" r="7">
-          <animateMotion dur="9s" repeatCount="indefinite" rotate="auto">
-            <mpath href="#orbitPath" />
-          </animateMotion>
+          <animateMotion
+            path={ORBIT_PATH}
+            dur="9s"
+            repeatCount="indefinite"
+            rotate="auto"
+          />
         </circle>
 
         {/* Electron 2: same path, but its group is rotated 60deg so
@@ -91,13 +85,12 @@ export default function AtomicModel() {
         <g className="orbit-two-group">
           <circle className="atomic-electron" r="7">
             <animateMotion
+              path={ORBIT_PATH}
               dur="12s"
               repeatCount="indefinite"
               rotate="auto"
               begin="-2s"
-            >
-              <mpath href="#orbitPath" />
-            </animateMotion>
+            />
           </circle>
         </g>
 
@@ -105,15 +98,14 @@ export default function AtomicModel() {
         <g className="orbit-three-group">
           <circle className="atomic-electron" r="7">
             <animateMotion
+              path={ORBIT_PATH}
               dur="15s"
               repeatCount="indefinite"
               rotate="auto"
               keyPoints="1;0"
               keyTimes="0;1"
               calcMode="linear"
-            >
-              <mpath href="#orbitPath" />
-            </animateMotion>
+            />
           </circle>
         </g>
       </g>
