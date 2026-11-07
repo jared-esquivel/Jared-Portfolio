@@ -82,33 +82,29 @@ function useRevealOnce(threshold = 0.2) {
 
 function RecognitionCard({ item, index, isVisible }) {
   return (
-    <article
+    <a
       className={
         `small-card small-card--${item.variant}` +
         (isVisible ? " is-visible" : "")
       }
+      href={item.href}
+      target="_blank"
+      rel="noopener noreferrer"
       style={{
         transitionDelay: prefersReducedMotion ? "0ms" : `${index * 110}ms`,
       }}
     >
       <div className="card-image">
-        <img src={item.image} alt={item.title} className="card-story-image" />
+        <img src={item.image} alt="" className="card-story-image" />
       </div>
       <div className="card-content">
         <p className="date">{item.date}</p>
         <h3>{item.title}</h3>
         <p>{item.description}</p>
 
-        <a
-          href={item.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="card-link"
-        >
-          Read Story →
-        </a>
+        <span className="card-link">Read Story →</span>
       </div>
-    </article>
+    </a>
   );
 }
 
@@ -161,16 +157,19 @@ export default function RecognitionSection() {
 
         {/* RIGHT SIDE */}
         <div className="recognition-right">
-          <article
+          <a
             className={
               "featured-card" + (featuredReveal.isVisible ? " is-visible" : "")
             }
             ref={featuredReveal.ref}
+            href={FEATURED_STORY.href}
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <div className="featured-image">
               <img
                 src={FEATURED_STORY.image}
-                alt={FEATURED_STORY.title}
+                alt=""
                 className="featured-story-image"
               />
             </div>
@@ -178,11 +177,9 @@ export default function RecognitionSection() {
               <p className="date">{FEATURED_STORY.eyebrow}</p>
               <h2>{FEATURED_STORY.title}</h2>
               <p>{FEATURED_STORY.description}</p>
-              <a target="_blank" href={FEATURED_STORY.href}>
-                Read Story →
-              </a>
+              <span className="featured-link">Read Story →</span>
             </div>
-          </article>
+          </a>
         </div>
       </div>
     </section>
