@@ -40,9 +40,9 @@ const PROJECTS = [
     title: "Prompt Us Pizzeria",
     type: "Web App",
     description:
-      "Interactive personal identifiable information training tool for nonprofits, equipping users to recognize and secure sensitive personal data,",
+      "Interactive personally identifiable information training tool for nonprofits, equipping users to recognize and secure sensitive personal data.",
     tech: ["React", "Phaser 3", "JavaScript", "Tailwind.css"],
-    liveUrl: "https://example.com/prompt-us-pizzeria",
+    liveUrl: "https://prompt-us-pizzeria.pages.dev/",
     image: promptUsImg,
   },
   {
@@ -51,7 +51,7 @@ const PROJECTS = [
     type: "Web App",
     description:
       "A premium personal portfolio with animated sections, reusable components, and responsive layouts.",
-    tech: ["React", "CSS", "Cluade"],
+    tech: ["React", "CSS", "Claude"],
     image: portfolioImg,
   },
   {
@@ -88,7 +88,7 @@ const PROJECTS = [
     image: Terminal,
   },
   {
-    id: "digital-nest-pages",
+    id: "island-of-kauai",
     title: "The Island of Kauai",
     type: "Website",
     description:
@@ -229,7 +229,7 @@ export default function SoftwareDevelopmentSection() {
           </button>
         </div>
 
-        <div className="preview-row" role="list" aria-label="All projects">
+        <div className="preview-row" aria-label="All projects">
           {PROJECTS.map((p, index) => (
             <article
               key={p.id}

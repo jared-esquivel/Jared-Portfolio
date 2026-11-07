@@ -23,11 +23,11 @@ const LEADERSHIP = [
   {
     id: "Adobe-Engineering-Panel",
     number: "02",
-    title: "Adobe Engineering-Panel",
+    title: "Adobe Engineering Panel",
     kicker: "LUCES Cabrillo",
     description:
       "Led an Adobe HOLA engineering panel, creating opportunities for students to engage directly with Adobe engineers.",
-    tags: ["Egineering", "Panel", "Leadership"],
+    tags: ["Engineering", "Panel", "Leadership"],
     accent: "#20ff9f",
     accent2: "#00d9c4",
     image: Adobe,
@@ -38,7 +38,7 @@ const LEADERSHIP = [
     title: "Joby Aviation Panel",
     kicker: "Student Organizer",
     description:
-      "Hosted a Joby Aviation engineering panel at my college, connecting students with engineers and industry professionals..",
+      "Hosted a Joby Aviation engineering panel at my college, connecting students with engineers and industry professionals.",
     tags: ["STEM", "Panels", "Students"],
     accent: "#a66bff",
     accent2: "#4f7dff",
@@ -99,20 +99,23 @@ function LeadershipPanel({ item, isOpen, onToggle }) {
         className="panel-content"
         role="region"
         aria-labelledby={buttonId}
+        aria-hidden={!isOpen}
       >
-        <div className="panel-visual">
-          <img src={item.image} alt={item.title} className="panel-image" />
-        </div>
+        <div className="panel-content-inner">
+          <div className="panel-visual">
+            <img src={item.image} alt="" className="panel-image" />
+          </div>
 
-        <div className="panel-info">
-          <p className="panel-kicker">{item.kicker}</p>
-          <h3>{item.title}</h3>
-          <p>{item.description}</p>
+          <div className="panel-info">
+            <p className="panel-kicker">{item.kicker}</p>
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
 
-          <div className="panel-tags">
-            {item.tags.map((tag) => (
-              <span key={tag}>{tag}</span>
-            ))}
+            <div className="panel-tags">
+              {item.tags.map((tag) => (
+                <span key={tag}>{tag}</span>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -122,7 +125,6 @@ function LeadershipPanel({ item, isOpen, onToggle }) {
 
 export default function LeadershipSection() {
   const canvasRef = useRef(null);
-  const panelRefs = useRef([]);
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
@@ -132,21 +134,7 @@ export default function LeadershipSection() {
   }, []);
 
   function handleToggle(index) {
-    if (activeIndex === index) {
-      setActiveIndex(null);
-      return;
-    }
-
-    setActiveIndex(index);
-
-    requestAnimationFrame(() => {
-      setTimeout(() => {
-        panelRefs.current[index]?.scrollIntoView({
-          behavior: "smooth",
-          block: "nearest",
-        });
-      }, 320);
-    });
+    setActiveIndex((current) => (current === index ? null : index));
   }
 
   return (
@@ -175,9 +163,6 @@ export default function LeadershipSection() {
                 "leadership-panel-wrap" +
                 (activeIndex === index ? " active" : "")
               }
-              ref={(node) => {
-                panelRefs.current[index] = node;
-              }}
             >
               <LeadershipPanel
                 item={item}

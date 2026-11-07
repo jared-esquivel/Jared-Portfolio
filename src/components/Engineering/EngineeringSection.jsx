@@ -11,13 +11,12 @@ const ENGINEERING_PROJECTS = [
     title: "ROV Engineering Project",
     description:
       "Designed and built an underwater ROV, applying engineering design, prototyping, and hands-on problem-solving.",
-    image: "projectOne",
     image: engineeringOneImg,
     theme: "light", // black text
   },
   {
     id: "project-two",
-    title: "Micro Python Raspberry PI Configuration",
+    title: "MicroPython Raspberry Pi Configuration",
     description:
       "Configured and programmed a Raspberry Pi using MicroPython to build embedded systems and hardware control applications.",
     image: Micro,
@@ -25,9 +24,9 @@ const ENGINEERING_PROJECTS = [
   },
   {
     id: "project-three",
-    title: "Engineering 3-D Redering Model",
+    title: "Engineering 3D Rendering Model",
     description:
-      "Designed 3D-printable models, applying tinker CAD and prototyping to bring engineering concepts to life.",
+      "Designed 3D-printable models, applying Tinkercad and prototyping to bring engineering concepts to life.",
     image: engineeringThreeImg,
     theme: "light", // white text
   },
