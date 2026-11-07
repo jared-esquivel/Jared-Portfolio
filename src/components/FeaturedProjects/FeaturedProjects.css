@@ -99,7 +99,7 @@
 }
 
 .project-card:hover,
-.project-card:focus-within {
+.project-card:focus-visible {
   transform: translateY(-6px);
   border-color: rgba(255, 255, 255, 0.22);
   background: rgba(255, 255, 255, 0.05);
@@ -127,7 +127,7 @@
 }
 
 .project-card:hover .project-media-glow,
-.project-card:focus-within .project-media-glow {
+.project-card:focus-visible .project-media-glow {
   opacity: 1;
   transform: scale(1.03);
 }
@@ -247,8 +247,8 @@
     color 0.3s ease;
 }
 
-.project-link:hover,
-.project-link:focus-visible {
+.project-card:hover .project-link,
+.project-card:focus-visible .project-link {
   border-color: rgba(124, 255, 224, 0.6);
   gap: 10px;
 }
@@ -257,8 +257,8 @@
   transition: transform 0.3s ease;
 }
 
-.project-link:hover span,
-.project-link:focus-visible span {
+.project-card:hover .project-link span,
+.project-card:focus-visible .project-link span {
   transform: translateX(2px);
 }
 
@@ -267,15 +267,9 @@
    Cards and links both need a clearly visible keyboard focus
    ring, distinct from the hover glow.
    ========================================================== */
-.project-card:focus-within {
+.project-card:focus-visible {
   outline: 2px solid rgba(124, 255, 224, 0.5);
   outline-offset: 3px;
-}
-
-.project-link:focus-visible {
-  outline: 2px solid rgba(124, 255, 224, 0.7);
-  outline-offset: 3px;
-  border-radius: 3px;
 }
 
 /* ==========================================================
@@ -292,7 +286,7 @@
   }
 
   .project-card:hover,
-  .project-card:focus-within {
+  .project-card:focus-visible {
     transform: none;
   }
 }

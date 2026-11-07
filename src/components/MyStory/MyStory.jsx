@@ -1,5 +1,6 @@
 import "./MyStory.css";
 import NightSky from "../NightSky/NightSky";
+import KineticStatement from "./KineticStatement";
 import portrait from "../../assets/Jared-Headshot.png";
 
 export default function MyStory() {
@@ -26,10 +27,7 @@ export default function MyStory() {
         <div className="story-content">
           <p className="story-kicker">My Story</p>
 
-          <h1>
-            Built to Innovate.
-            <span>Ready to Lead.</span>
-          </h1>
+          <KineticStatement />
 
           <div className="story-copy">
             <p>I don't wait for opportunities, I build them.</p>

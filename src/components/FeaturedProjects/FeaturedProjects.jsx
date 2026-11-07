@@ -64,9 +64,12 @@ export default function FeaturedProjects() {
         {/* Card grid — single column on mobile, up to 3 across on desktop */}
         <div className="projects-grid">
           {projects.map((project) => (
-            <article
+            <a
               key={project.id}
               className={`project-card project-card--${project.accent}`}
+              href={project.href}
+              target="_blank"
+              rel="noopener noreferrer"
             >
               {/* Image/mockup placeholder area */}
               <div className="project-media">
@@ -89,16 +92,11 @@ export default function FeaturedProjects() {
                   ))}
                 </ul>
 
-                <a
-                  href={project.href}
-                  className="project-link"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <span className="project-link">
                   View Project <span aria-hidden="true">→</span>
-                </a>
+                </span>
               </div>
-            </article>
+            </a>
           ))}
         </div>
       </div>
