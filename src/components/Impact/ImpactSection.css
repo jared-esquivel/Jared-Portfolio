@@ -255,6 +255,8 @@ body {
   border-radius: 28px;
   background: #0d1118;
   border: 1px solid rgba(255, 255, 255, 0.08);
+  color: white;
+  text-decoration: none;
 
   opacity: 1;
   transform: translateY(0) scale(1);
@@ -266,12 +268,17 @@ body {
 }
 
 .impact-panel:hover,
-.impact-panel:focus-within {
+.impact-panel:focus-visible {
   transform: translateY(-8px) scale(1);
   border-color: rgba(0, 224, 255, 0.28);
   box-shadow:
     0 34px 80px rgba(0, 0, 0, 0.5),
     0 0 46px rgba(0, 224, 255, 0.1);
+}
+
+.impact-panel:focus-visible {
+  outline: 3px solid #71fff2;
+  outline-offset: 4px;
 }
 
 /* =====================================================
@@ -287,7 +294,7 @@ body {
 }
 
 .impact-panel:hover .panel-image,
-.impact-panel:focus-within .panel-image {
+.impact-panel:focus-visible .panel-image {
   transform: scale(1.045); /* slow, subtle — not the exaggerated 1.05+ snap */
 }
 
@@ -325,7 +332,7 @@ body {
 }
 
 .impact-panel:hover .panel-overlay,
-.impact-panel:focus-within .panel-overlay {
+.impact-panel:focus-visible .panel-overlay {
   transform: translateY(-4px); /* "only a few pixels," per the brief */
 }
 
@@ -340,6 +347,29 @@ body {
   color: rgba(255, 255, 255, 0.75);
   line-height: 1.55;
   font-size: 1.05rem;
+}
+
+.panel-link-cue {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  color: #71fff2;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.panel-link-cue span {
+  transition: transform 0.3s ease;
+}
+
+.impact-panel:hover .panel-link-cue span,
+.impact-panel:focus-visible .panel-link-cue span {
+  transform: translateX(4px);
+}
+
+.panel-carousel-controls {
+  display: none;
 }
 
 /* =====================================================
@@ -398,6 +428,88 @@ body {
     height: 460px;
     scroll-snap-align: center;
   }
+
+  .panel-carousel-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 8px;
+  }
+
+  .panel-carousel-arrow,
+  .panel-carousel-dot {
+    border: 0;
+    color: white;
+    cursor: pointer;
+    font: inherit;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .panel-carousel-arrow {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    font-size: 1.2rem;
+    transition:
+      background-color 0.25s ease,
+      border-color 0.25s ease,
+      opacity 0.25s ease;
+  }
+
+  .panel-carousel-arrow:disabled {
+    cursor: default;
+    opacity: 0.3;
+  }
+
+  .panel-carousel-arrow:not(:disabled):hover,
+  .panel-carousel-arrow:not(:disabled):focus-visible {
+    background: rgba(113, 255, 242, 0.13);
+    border-color: rgba(113, 255, 242, 0.42);
+  }
+
+  .panel-carousel-arrow:focus-visible,
+  .panel-carousel-dot:focus-visible {
+    outline: 2px solid #71fff2;
+    outline-offset: 3px;
+  }
+
+  .panel-carousel-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+  }
+
+  .panel-carousel-dot {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    background: transparent;
+    border-radius: 50%;
+  }
+
+  .panel-carousel-dot span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transition:
+      width 0.25s ease,
+      background-color 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+  .panel-carousel-dot.is-active span {
+    width: 22px;
+    border-radius: 999px;
+    background: #71fff2;
+    box-shadow: 0 0 14px rgba(113, 255, 242, 0.65);
+  }
 }
 
 /* =====================================================
@@ -423,12 +535,18 @@ body {
   }
 
   .impact-panel:hover,
-  .impact-panel:focus-within,
+  .impact-panel:focus-visible,
   .impact-panel:hover .panel-image,
-  .impact-panel:focus-within .panel-image,
+  .impact-panel:focus-visible .panel-image,
   .impact-panel:hover .panel-overlay,
-  .impact-panel:focus-within .panel-overlay {
+  .impact-panel:focus-visible .panel-overlay {
     transform: none !important;
+  }
+
+  .panel-link-cue span,
+  .panel-carousel-arrow,
+  .panel-carousel-dot span {
+    transition: none !important;
   }
 }
 

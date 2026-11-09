@@ -10,6 +10,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Home from "./Pages/Home";
 import Projects from "./Pages/Projects";
 import Media from "./Pages/Media";
+import HackWatsonville from "./Pages/HackWatsonville";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -31,6 +32,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/media" element={<Media />} />
+        <Route path="/hackwatsonville" element={<HackWatsonville />} />
       </Routes>
     </Router>
   );

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { startFireflies } from "./fireflyCanvas.js";
 import "./ImpactSection.css";
 import hackImg from "../../assets/HackWatsonville-logo.png";
@@ -43,6 +44,7 @@ const INITIATIVES = [
     description:
       "Founded a student hackathon for creativity, access, and community impact.",
     image: hackImg,
+    to: "/hackwatsonville",
   },
   {
     id: "engineering-panels",
@@ -118,13 +120,8 @@ function StatCard({ stat, index, isVisible }) {
 
 // ---------- One initiative panel ----------
 function InitiativePanel({ item, index, isVisible }) {
-  return (
-    <article
-      className={"impact-panel" + (isVisible ? " is-visible" : "")}
-      style={{
-        transitionDelay: prefersReducedMotion ? "0ms" : `${index * 100}ms`,
-      }}
-    >
+  const content = (
+    <>
       <div
         className="panel-image"
         style={{ backgroundImage: `url(${item.image})` }}
@@ -132,7 +129,31 @@ function InitiativePanel({ item, index, isVisible }) {
       <div className="panel-overlay">
         <h3>{item.title}</h3>
         <p>{item.description}</p>
+        {item.to && (
+          <span className="panel-link-cue" aria-hidden="true">
+            Learn more <span>→</span>
+          </span>
+        )}
       </div>
+    </>
+  );
+
+  const className = "impact-panel" + (isVisible ? " is-visible" : "");
+  const style = {
+    transitionDelay: prefersReducedMotion ? "0ms" : `${index * 100}ms`,
+  };
+
+  if (item.to) {
+    return (
+      <Link className={className} style={style} to={item.to}>
+        {content}
+      </Link>
+    );
+  }
+
+  return (
+    <article className={className} style={style}>
+      {content}
     </article>
   );
 }
@@ -171,8 +192,11 @@ function useRevealOnce(threshold = 0.2) {
 
 export default function ImpactSection() {
   const canvasRef = useRef(null);
+  const panelGridRef = useRef(null);
+  const panelScrollFrameRef = useRef(null);
   const statsReveal = useRevealOnce(0.3);
   const panelsReveal = useRevealOnce(0.15);
+  const [activePanel, setActivePanel] = useState(0);
 
   // Start/stop the firefly canvas exactly once, same lifecycle
   // pattern as your Hero's aurora canvas.
@@ -181,6 +205,49 @@ export default function ImpactSection() {
     const cleanup = startFireflies(canvasRef.current);
     return cleanup;
   }, []);
+
+  useEffect(
+    () => () => cancelAnimationFrame(panelScrollFrameRef.current),
+    [],
+  );
+
+  function updateActivePanel() {
+    const grid = panelGridRef.current;
+    if (!grid) return;
+
+    cancelAnimationFrame(panelScrollFrameRef.current);
+    panelScrollFrameRef.current = requestAnimationFrame(() => {
+      const gridCenter = grid.scrollLeft + grid.clientWidth / 2;
+      const panels = Array.from(grid.children);
+      let closestIndex = 0;
+      let closestDistance = Infinity;
+
+      panels.forEach((panel, index) => {
+        const panelCenter = panel.offsetLeft + panel.offsetWidth / 2;
+        const distance = Math.abs(panelCenter - gridCenter);
+        if (distance < closestDistance) {
+          closestIndex = index;
+          closestDistance = distance;
+        }
+      });
+
+      setActivePanel(closestIndex);
+    });
+  }
+
+  function scrollToPanel(index) {
+    const grid = panelGridRef.current;
+    const panel = grid?.children[index];
+    if (!grid || !panel) return;
+
+    const centeredLeft =
+      panel.offsetLeft - (grid.clientWidth - panel.offsetWidth) / 2;
+    grid.scrollTo({
+      left: centeredLeft,
+      behavior: prefersReducedMotion ? "auto" : "smooth",
+    });
+    setActivePanel(index);
+  }
 
   return (
     <>
@@ -200,7 +267,7 @@ export default function ImpactSection() {
                 type="button"
                 onClick={() => {
                   document.getElementById("impact-content")?.scrollIntoView({
-                    behavior: "smooth",
+                    behavior: prefersReducedMotion ? "auto" : "smooth",
                     block: "start",
                   });
                 }}
@@ -242,7 +309,7 @@ export default function ImpactSection() {
                 type="button"
                 onClick={() => {
                   document.getElementById("experience")?.scrollIntoView({
-                    behavior: "smooth",
+                    behavior: prefersReducedMotion ? "auto" : "smooth",
                     block: "start",
                   });
                 }}
@@ -252,7 +319,14 @@ export default function ImpactSection() {
             </div>
           </div>
 
-          <div className="panel-grid" ref={panelsReveal.ref}>
+          <div
+            className="panel-grid"
+            ref={(node) => {
+              panelGridRef.current = node;
+              panelsReveal.ref.current = node;
+            }}
+            onScroll={updateActivePanel}
+          >
             {INITIATIVES.map((item, index) => (
               <InitiativePanel
                 key={item.id}
@@ -261,6 +335,49 @@ export default function ImpactSection() {
                 isVisible={panelsReveal.isVisible}
               />
             ))}
+          </div>
+
+          <div
+            className="panel-carousel-controls"
+            aria-label="Impact panel navigation"
+          >
+            <button
+              type="button"
+              className="panel-carousel-arrow"
+              aria-label="Previous impact panel"
+              disabled={activePanel === 0}
+              onClick={() => scrollToPanel(activePanel - 1)}
+            >
+              ←
+            </button>
+
+            <div className="panel-carousel-dots">
+              {INITIATIVES.map((item, index) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  className={
+                    "panel-carousel-dot" +
+                    (activePanel === index ? " is-active" : "")
+                  }
+                  aria-label={`Show ${item.title} panel`}
+                  aria-current={activePanel === index ? "true" : undefined}
+                  onClick={() => scrollToPanel(index)}
+                >
+                  <span />
+                </button>
+              ))}
+            </div>
+
+            <button
+              type="button"
+              className="panel-carousel-arrow"
+              aria-label="Next impact panel"
+              disabled={activePanel === INITIATIVES.length - 1}
+              onClick={() => scrollToPanel(activePanel + 1)}
+            >
+              →
+            </button>
           </div>
         </div>
       </section>
